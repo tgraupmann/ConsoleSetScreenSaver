@@ -4,6 +4,7 @@
 
 using Microsoft.Win32;
 using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace ConsoleSetScreenSaver
@@ -95,6 +96,16 @@ namespace ConsoleSetScreenSaver
                     }
 
                     oKey.Close();
+
+                    if (enable)
+                    {
+                        ProcessStartInfo psi = new ProcessStartInfo(BLANK_SCREENSAVER, string.Empty);
+                        using (Process p = new Process())
+                        {
+                            p.StartInfo = psi;
+                            p.Start();
+                        }
+                    }
                 }
             }
             catch (Exception e)
